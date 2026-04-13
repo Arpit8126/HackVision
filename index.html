@@ -281,66 +281,7 @@
                         </tr>
                     </thead>
                     <tbody id="leaderboard-body">
-                        <!-- Rank 1 -->
-                        <tr>
-                            <td>
-                                <div style="display: flex; align-items: center;">
-                                    <span class="rank-box">1</span>
-                                    <span class="team-name">Binary Beasts</span>
-                                </div>
-                            </td>
-                            <td class="score-val">19</td>
-                            <td class="score-val">20</td>
-                            <td class="score-val">19</td>
-                            <td class="score-val">18</td>
-                            <td class="score-val">20</td>
-                            <td class="total-val">96</td>
-                        </tr>
-                        <!-- Rank 2 -->
-                        <tr>
-                            <td>
-                                <div style="display: flex; align-items: center;">
-                                    <span class="rank-box">2</span>
-                                    <span class="team-name">Cyber Sentinels</span>
-                                </div>
-                            </td>
-                            <td class="score-val">18</td>
-                            <td class="score-val">19</td>
-                            <td class="score-val">19</td>
-                            <td class="score-val">18</td>
-                            <td class="score-val">19</td>
-                            <td class="total-val">93</td>
-                        </tr>
-                        <!-- Rank 3 -->
-                        <tr>
-                            <td>
-                                <div style="display: flex; align-items: center;">
-                                    <span class="rank-box">3</span>
-                                    <span class="team-name">Script Sorcerers</span>
-                                </div>
-                            </td>
-                            <td class="score-val">17</td>
-                            <td class="score-val">18</td>
-                            <td class="score-val">18</td>
-                            <td class="score-val">19</td>
-                            <td class="score-val">17</td>
-                            <td class="total-val">89</td>
-                        </tr>
-                        <!-- Rank 4 -->
-                        <tr>
-                            <td>
-                                <div style="display: flex; align-items: center;">
-                                    <span class="rank-box">4</span>
-                                    <span class="team-name">Logic Lords</span>
-                                </div>
-                            </td>
-                            <td class="score-val">16</td>
-                            <td class="score-val">17</td>
-                            <td class="score-val">18</td>
-                            <td class="score-val">16</td>
-                            <td class="score-val">16</td>
-                            <td class="total-val">83</td>
-                        </tr>
+                        <!-- Data will be injected here by JavaScript -->
                     </tbody>
                 </table>
             </div>
@@ -348,17 +289,83 @@
     </main>
 
     <script>
-        // Smooth entrance for rows
-        document.querySelectorAll('tbody tr').forEach((tr, index) => {
-            tr.style.opacity = '0';
-            tr.style.transform = 'translateX(-20px)';
-            tr.style.transition = `all 0.6s cubic-bezier(0.23, 1, 0.32, 1) ${0.2 + (index * 0.1)}s`;
+        const teams = [
+            { name: "Apex Unit", ui: 8, innovation: 7, functionality: 8, teamwork: 8, presentation: 7, total: 38 },
+            { name: "Brainstormers", ui: 6, innovation: 7, functionality: 5, teamwork: 6, presentation: 7, total: 31 },
+            { name: "Byte Karma", ui: 7, innovation: 8, functionality: 5, teamwork: 7, presentation: 8, total: 35 },
+            { name: "Byte Verse", ui: 9, innovation: 7, functionality: 8, teamwork: 6, presentation: 7, total: 37 },
+            { name: "Circuit Squad", ui: 8, innovation: 6, functionality: 6, teamwork: 8, presentation: 8, total: 36 },
+            { name: "Code Burster", ui: 7, innovation: 8, functionality: 5, teamwork: 7, presentation: 6, total: 33 },
+            { name: "Code Crafters", ui: 8, innovation: 8, functionality: 10, teamwork: 9, presentation: 10, total: 45 },
+            { name: "Code Ninjas", ui: 9, innovation: 7, functionality: 8, teamwork: 8, presentation: 8, total: 40 },
+            { name: "Code Snippet", ui: 9, innovation: 8, functionality: 8, teamwork: 9, presentation: 9, total: 43 },
+            { name: "Code storm", ui: 8, innovation: 6, functionality: 9, teamwork: 6, presentation: 8, total: 37 },
+            { name: "Code Titans", ui: 7, innovation: 4, functionality: 5, teamwork: 3, presentation: 5, total: 24 },
+            { name: "Code viberZ", ui: 5, innovation: 6, functionality: 6, teamwork: 6, presentation: 8, total: 31 },
+            { name: "Code Vortex", ui: 8, innovation: 8, functionality: 10, teamwork: 9, presentation: 10, total: 45 },
+            { name: "Code Warriors", ui: 5, innovation: 6, functionality: 5, teamwork: 4, presentation: 1, total: 21 },
+            { name: "Codexa", ui: 8, innovation: 6, functionality: 6, teamwork: 5, presentation: 6, total: 31 },
+            { name: "Cyber knights", ui: 8, innovation: 7, functionality: 8, teamwork: 9, presentation: 8, total: 40 },
+            { name: "Deathly hallows", ui: 7, innovation: 6, functionality: 3, teamwork: 4, presentation: 4, total: 24 },
+            { name: "Debug2Ace", ui: 8, innovation: 6, functionality: 6, teamwork: 7, presentation: 2, total: 29 },
+            { name: "Digital Destroyerz", ui: 9, innovation: 7, functionality: 6, teamwork: 8, presentation: 5, total: 35 },
+            { name: "EKLAVYA", ui: 9, innovation: 7, functionality: 6, teamwork: 6, presentation: 7, total: 35 },
+            { name: "CodeXcrew", ui: 6, innovation: 6, functionality: 8, teamwork: 9, presentation: 10, total: 39 },
+            { name: "GLA Glitchers", ui: 8, innovation: 6, functionality: 6, teamwork: 5, presentation: 2, total: 27 },
+            { name: "Hack N chill", ui: 8, innovation: 6, functionality: 7, teamwork: 8, presentation: 6, total: 35 },
+            { name: "Hack Verse", ui: 9, innovation: 9, functionality: 9, teamwork: 9, presentation: 9, total: 45 },
+            { name: "HACK4Brix", ui: 7, innovation: 6, functionality: 5, teamwork: 6, presentation: 6, total: 30 },
+            { name: "Idea Hakers", ui: 7, innovation: 7, functionality: 5, teamwork: 4, presentation: 5, total: 28 },
+            { name: "InnovX", ui: 10, innovation: 9, functionality: 9, teamwork: 7, presentation: 8, total: 43 },
+            { name: "King Crafters", ui: 8, innovation: 7, functionality: 5, teamwork: 8, presentation: 8, total: 36 },
+            { name: "Neuro Ninjas", ui: 8, innovation: 7, functionality: 9, teamwork: 7, presentation: 10, total: 41 },
+            { name: "Runtime terror", ui: 8, innovation: 6, functionality: 5, teamwork: 6, presentation: 7, total: 32 },
+            { name: "Squard", ui: 8, innovation: 8, functionality: 7, teamwork: 9, presentation: 6, total: 38 },
+            { name: "Team Cypher", ui: 7, innovation: 6, functionality: 8, teamwork: 8, presentation: 8, total: 37 },
+            { name: "TEAM vision", ui: 8, innovation: 8, functionality: 9, teamwork: 9, presentation: 8, total: 42 },
+            { name: "The Ogs", ui: 9, innovation: 8, functionality: 8, teamwork: 7, presentation: 8, total: 40 },
+            { name: "The Visionaries", ui: 8, innovation: 8, functionality: 9, teamwork: 9, presentation: 8, total: 42 },
+            { name: "The Warriors", ui: 8, innovation: 7, functionality: 7, teamwork: 7, presentation: 5, total: 34 },
+            { name: "Victory Coders", ui: 8, innovation: 6, functionality: 7, teamwork: 9, presentation: 7, total: 37 },
+            { name: "VyomX", ui: 6, innovation: 4, functionality: 6, teamwork: 7, presentation: 5, total: 28 },
+            { name: "Warrior coders", ui: 9, innovation: 8, functionality: 7, teamwork: 7, presentation: 7, total: 38 }
+        ];
+
+        function renderLeaderboard() {
+            const tbody = document.getElementById('leaderboard-body');
             
+            // Sort teams by total in descending order
+            const sortedTeams = [...teams].sort((a, b) => b.total - a.total);
+            
+            tbody.innerHTML = sortedTeams.map((team, index) => `
+                <tr style="opacity: 0; transform: translateX(-20px);">
+                    <td>
+                        <div style="display: flex; align-items: center;">
+                            <span class="rank-box">${index + 1}</span>
+                            <span class="team-name">${team.name}</span>
+                        </div>
+                    </td>
+                    <td class="score-val">${team.ui}</td>
+                    <td class="score-val">${team.innovation}</td>
+                    <td class="score-val">${team.functionality}</td>
+                    <td class="score-val">${team.teamwork}</td>
+                    <td class="score-val">${team.presentation}</td>
+                    <td class="total-val">${team.total}</td>
+                </tr>
+            `).join('');
+
+            // Trigger animations
             setTimeout(() => {
-                tr.style.opacity = '1';
-                tr.style.transform = 'translateX(0)';
+                document.querySelectorAll('tbody tr').forEach((tr, index) => {
+                    tr.style.transition = `all 0.6s cubic-bezier(0.23, 1, 0.32, 1) ${0.1 + (index * 0.05)}s`;
+                    tr.style.opacity = '1';
+                    tr.style.transform = 'translateX(0)';
+                });
             }, 50);
-        });
+        }
+
+        // Initialize
+        renderLeaderboard();
     </script>
 </body>
 </html>
