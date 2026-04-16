@@ -253,6 +253,105 @@
             .team-name { font-size: 0.85rem; }
             .total-val { font-size: 1.1rem; }
         }
+        /* Showcase Section */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            width: 95%;
+            max-width: 1100px;
+            margin-bottom: 3rem;
+        }
+
+        .showcase-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .showcase-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .showcase-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent-cyan));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .showcase-card:hover::before {
+            opacity: 1;
+        }
+
+        .showcase-rank {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .showcase-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            color: var(--text-main);
+        }
+
+        .showcase-score {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent-cyan);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .showcase-score span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .section-label {
+            width: 100%;
+            text-align: left;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, rgba(255,255,255,0.1), transparent);
+        }
+
+        @media (max-width: 768px) {
+            .showcase-grid { grid-template-columns: 1fr; }
+            .showcase-name { font-size: 1.25rem; }
+            .showcase-score { font-size: 2rem; }
+        }
     </style>
 </head>
 <body>
@@ -262,10 +361,23 @@
     <header class="header">
         <span class="club-tag">BCA-O-CRATES Club | GLA University</span>
         <h1 class="main-title">HACKVISION</h1>
-        <p class="subtitle">Live Leaderboard</p>
+        <p class="subtitle">Final Result</p>
     </header>
 
     <main class="container">
+        <div class="section-label">
+            <i data-lucide="trophy" style="color: #FFD700;"></i>
+            TOP 8 FINALISTS
+        </div>
+        
+        <div class="showcase-grid" id="top-8-showcase">
+            <!-- Top 3 highlighted first -->
+        </div>
+
+        <div class="section-label">
+            <i data-lucide="list"></i>
+            FULL RANKINGS
+        </div>
         <div class="leaderboard-card">
             <div class="table-scroll">
                 <table>
@@ -290,47 +402,36 @@
 
     <script>
         const teams = [
-            { name: "Apex Unit", ui: 8, innovation: 7, functionality: 8, teamwork: 8, presentation: 7, total: 38 },
-            { name: "Brainstormers", ui: 6, innovation: 7, functionality: 5, teamwork: 6, presentation: 7, total: 31 },
-            { name: "Byte Karma", ui: 7, innovation: 8, functionality: 5, teamwork: 7, presentation: 8, total: 35 },
-            { name: "Byte Verse", ui: 9, innovation: 7, functionality: 8, teamwork: 6, presentation: 7, total: 37 },
-            { name: "Circuit Squad", ui: 8, innovation: 6, functionality: 6, teamwork: 8, presentation: 8, total: 36 },
-            { name: "Code Burster", ui: 7, innovation: 8, functionality: 5, teamwork: 7, presentation: 6, total: 33 },
-            { name: "Code Crafters", ui: 8, innovation: 8, functionality: 10, teamwork: 9, presentation: 10, total: 45 },
-            { name: "Code Ninjas", ui: 9, innovation: 7, functionality: 8, teamwork: 8, presentation: 8, total: 40 },
-            { name: "Code Snippet", ui: 9, innovation: 8, functionality: 8, teamwork: 9, presentation: 9, total: 43 },
-            { name: "Code storm", ui: 8, innovation: 6, functionality: 9, teamwork: 6, presentation: 8, total: 37 },
-            { name: "Code Titans", ui: 7, innovation: 4, functionality: 5, teamwork: 3, presentation: 5, total: 24 },
-            { name: "Code viberZ", ui: 5, innovation: 6, functionality: 6, teamwork: 6, presentation: 8, total: 31 },
-            { name: "Code Vortex", ui: 8, innovation: 8, functionality: 10, teamwork: 9, presentation: 10, total: 45 },
-            { name: "Code Warriors", ui: 5, innovation: 6, functionality: 5, teamwork: 4, presentation: 1, total: 21 },
-            { name: "Codexa", ui: 8, innovation: 6, functionality: 6, teamwork: 5, presentation: 6, total: 31 },
-            { name: "Cyber knights", ui: 8, innovation: 7, functionality: 8, teamwork: 9, presentation: 8, total: 40 },
-            { name: "Deathly hallows", ui: 7, innovation: 6, functionality: 3, teamwork: 4, presentation: 4, total: 24 },
-            { name: "Debug2Ace", ui: 8, innovation: 6, functionality: 6, teamwork: 7, presentation: 2, total: 29 },
-            { name: "Digital Destroyerz", ui: 9, innovation: 7, functionality: 6, teamwork: 8, presentation: 5, total: 35 },
-            { name: "EKLAVYA", ui: 9, innovation: 7, functionality: 6, teamwork: 6, presentation: 7, total: 35 },
-            { name: "CodeXcrew", ui: 6, innovation: 6, functionality: 8, teamwork: 9, presentation: 10, total: 39 },
-            { name: "GLA Glitchers", ui: 8, innovation: 6, functionality: 6, teamwork: 5, presentation: 2, total: 27 },
-            { name: "Hack N chill", ui: 8, innovation: 6, functionality: 7, teamwork: 8, presentation: 6, total: 35 },
-            { name: "Hack Verse", ui: 9, innovation: 9, functionality: 9, teamwork: 9, presentation: 9, total: 45 },
-            { name: "HACK4Brix", ui: 7, innovation: 6, functionality: 5, teamwork: 6, presentation: 6, total: 30 },
-            { name: "Idea Hakers", ui: 7, innovation: 7, functionality: 5, teamwork: 4, presentation: 5, total: 28 },
-            { name: "InnovX", ui: 10, innovation: 9, functionality: 9, teamwork: 7, presentation: 8, total: 43 },
-            { name: "King Crafters", ui: 8, innovation: 7, functionality: 5, teamwork: 8, presentation: 8, total: 36 },
-            { name: "Neuro Ninjas", ui: 8, innovation: 7, functionality: 9, teamwork: 7, presentation: 10, total: 41 },
-            { name: "Runtime terror", ui: 8, innovation: 6, functionality: 5, teamwork: 6, presentation: 7, total: 32 },
-            { name: "Squard", ui: 8, innovation: 8, functionality: 7, teamwork: 9, presentation: 6, total: 38 },
-            { name: "Team Cypher", ui: 7, innovation: 6, functionality: 8, teamwork: 8, presentation: 8, total: 37 },
-            { name: "TEAM vision", ui: 8, innovation: 8, functionality: 9, teamwork: 9, presentation: 8, total: 42 },
-            { name: "The Ogs", ui: 9, innovation: 8, functionality: 8, teamwork: 7, presentation: 8, total: 40 },
-            { name: "The Visionaries", ui: 8, innovation: 8, functionality: 9, teamwork: 9, presentation: 8, total: 42 },
-            { name: "The Warriors", ui: 8, innovation: 7, functionality: 7, teamwork: 7, presentation: 5, total: 34 },
-            { name: "Victory Coders", ui: 8, innovation: 6, functionality: 7, teamwork: 9, presentation: 7, total: 37 },
-            { name: "VyomX", ui: 6, innovation: 4, functionality: 6, teamwork: 7, presentation: 5, total: 28 },
-            { name: "Warrior coders", ui: 9, innovation: 8, functionality: 7, teamwork: 7, presentation: 7, total: 38 },
-            { name: "Visionary Coders", ui: 8, innovation: 8, functionality: 7, teamwork: 7, presentation: 7, total: 37 }
+            { name: "Team Vision", ui: 10, innovation: 10, functionality: 10, teamwork: 9, presentation: 10, total: 49 },
+            { name: "The Visionaries", ui: 10, innovation: 9, functionality: 10, teamwork: 10, presentation: 9, total: 48 },
+            { name: "Code snippets", ui: 9, innovation: 9, functionality: 10, teamwork: 10, presentation: 9, total: 47 },
+            { name: "Hack verse", ui: 9, innovation: 9, functionality: 9, teamwork: 10, presentation: 9, total: 46 },
+            { name: "Byte verse", ui: 9, innovation: 9, functionality: 10, teamwork: 9, presentation: 9, total: 46 },
+            { name: "Code crafters", ui: 9, innovation: 9, functionality: 9, teamwork: 9, presentation: 9, total: 45 },
+            { name: "InnovX", ui: 9, innovation: 9, functionality: 8, teamwork: 9, presentation: 9, total: 44 },
+            { name: "The OG's", ui: 8, innovation: 8, functionality: 9, teamwork: 9, presentation: 9, total: 43 }
         ];
+
+        function renderShowcase() {
+            const showcase = document.getElementById('top-8-showcase');
+            const sortedTeams = [...teams].sort((a, b) => b.total - a.total).slice(0, 8);
+            
+            showcase.innerHTML = sortedTeams.map((team, index) => `
+                <div class="showcase-card" style="opacity: 0; transform: translateY(20px);">
+                    <span class="showcase-rank">RANK #${index + 1}</span>
+                    <h3 class="showcase-name">${team.name}</h3>
+                    <div class="showcase-score">${team.total}<span>pts</span></div>
+                </div>
+            `).join('');
+
+            setTimeout(() => {
+                document.querySelectorAll('.showcase-card').forEach((card, index) => {
+                    card.style.transition = `all 0.6s cubic-bezier(0.23, 1, 0.32, 1) ${0.1 + (index * 0.1)}s`;
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                });
+            }, 100);
+        }
 
         function renderLeaderboard() {
             const tbody = document.getElementById('leaderboard-body');
@@ -366,7 +467,9 @@
         }
 
         // Initialize
+        renderShowcase();
         renderLeaderboard();
+        lucide.createIcons();
     </script>
 </body>
 </html>
